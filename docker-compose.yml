@@ -1,0 +1,9 @@
+version: '3'
+services:
+
+  node:
+    build:
+      context: docker/node
+      dockerfile: Dockerfile-node
+    volumes:
+      - ".:/usr/src/app:rw"
