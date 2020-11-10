@@ -1,12 +1,12 @@
 import Vue from 'vue';
-import DatePicker from './components/stats_filter/vue_date_picker.vue'
+import date_picker_modal from "./components/date_picker_modal.vue";
 
 
 
 let app = new Vue({
     el: '#app',
     components: {
-        'date-picker' : DatePicker
+        'date-picker-modal' : date_picker_modal
     }
 });
 
