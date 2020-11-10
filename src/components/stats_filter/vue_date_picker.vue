@@ -1,8 +1,9 @@
 <template>
   <div>
     <date_picker
-        v-model="time1"
+        v-model="value"
         :clearable="clearable"
+        v-on:input="handleInput"
     ></date_picker>
   </div>
 </template>
@@ -17,10 +18,17 @@ export default {
   components: {
     'date_picker': VueDatePicker
   },
+  props: {
+    value:{}
+  },
   data() {
     return {
-      time1: null,
       clearable: false,
+    }
+  },
+  methods: {
+    handleInput: function () {
+      this.$emit('input', this.value);
     }
   }
 }

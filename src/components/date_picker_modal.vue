@@ -1,6 +1,7 @@
 <template>
   <modal
       :component="component"
+      v-on:acceptModal="acceptModal"
   ></modal>
 </template>
 
@@ -18,6 +19,11 @@ export default {
   data() {
     return {
       component: date_picker
+    }
+  },
+  methods: {
+    acceptModal: function (event) {
+      alert(event);
     }
   }
 }

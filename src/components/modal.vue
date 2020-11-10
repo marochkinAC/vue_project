@@ -11,13 +11,14 @@
         </div>
 
         <div class="modal-body">
-          <component v-bind:is='component'></component>
-          <component v-bind:is='component'></component>
-          <component v-bind:is='component'></component>
+          <component
+              v-bind:is='component'
+              v-model="data"
+          ></component>
         </div>
 
         <div class="modal-footer">
-          <button class="btn btn-primary">Применить</button>
+          <button v-on:click="accept" class="btn btn-primary">Применить</button>
           <button class="btn btn-default">Отмена</button>
         </div>
 
@@ -33,6 +34,16 @@ export default {
     component: {
       type: Object
     },
+  },
+  data() {
+    return {
+      data: {},
+    }
+  },
+  methods: {
+    accept: function () {
+      this.$emit('acceptModal', this.data);
+    }
   }
 }
 </script>
