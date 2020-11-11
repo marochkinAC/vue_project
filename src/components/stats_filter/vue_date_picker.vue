@@ -29,9 +29,6 @@ export default {
       default: 'date'
     }
   },
-  created() {
-    this.date = this.input_val;
-  },
   components: {
     'date_picker': VueDatePicker
   },
@@ -43,6 +40,9 @@ export default {
   },
 
   watch: {
+    input_val() {
+      this.date = this.input_val;
+    },
     date() {
       this.$emit('update:input', this.date);
     }
