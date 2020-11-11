@@ -5,6 +5,7 @@
         :clearable="clearable"
         :format="format"
         :type="type"
+        value-type="format"
     ></date_picker>
   </div>
 </template>
@@ -16,7 +17,7 @@ import 'vue2-datepicker/locale/ru'
 export default {
   name: "vue_date_picker",
   props: {
-    input_val: {
+    from: {
       type: String,
       default: ''
     },
@@ -40,8 +41,8 @@ export default {
   },
 
   watch: {
-    input_val() {
-      this.date = this.input_val;
+    from() {
+      this.date = this.from;
     },
     date() {
       this.$emit('update:input', this.date);

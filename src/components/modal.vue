@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-mask">
+  <div @click="$emit('clickOut')" class="modal-mask">
     <div class="modal-dialog">
       <div class="modal-content">
 
@@ -7,18 +7,17 @@
           <h4 class="modal-title">
             {{header_text}}
           </h4>
-          <i class="modal-close-button"></i>
+          <i @click="$emit('close')" class="modal-close-button"></i>
         </div>
 
         <div class="modal-body">
           <component
               v-bind:is='component'
-              v-bind:input.sync="data"
           ></component>
         </div>
 
         <div class="modal-footer">
-          <button v-on:click="accept" class="btn btn-primary">Применить</button>
+          <button v-on:click="$emit('accept')" class="btn btn-primary">Применить</button>
           <button class="btn btn-default">Отмена</button>
         </div>
 
@@ -43,17 +42,11 @@ export default {
       data: {},
     }
   },
-  methods: {
-    accept: function () {
-      this.$emit('acceptModal', this.data);
-    }
-  }
 }
 </script>
 
 <style scoped>
-  /*@import "~bootstrap/dist/css/bootstrap.min.css";*/
-  @import "buttons.css";
+   @import "../style/buttons.css";
   .modal-mask {
     position: fixed;
     width: 100%;
@@ -61,7 +54,6 @@ export default {
     background-color: rgba(0, 0, 0, 0.3);
     left: 0;
     top: 0;
-    z-index: -9999;
   }
 
   .modal-content {
@@ -77,4 +69,12 @@ export default {
     width: 18px;
     height: 18px;
   }
+
+   .modal-close-button:focus, .modal-close-button:hover {
+     color: #000;
+     text-decoration: none;
+     cursor: pointer;
+     filter: alpha(opacity=50);
+     opacity: .5;
+   }
 </style>

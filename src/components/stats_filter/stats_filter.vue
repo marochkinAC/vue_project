@@ -7,8 +7,8 @@
             <label class="control-label col-md-3 text-left">C&nbsp;даты</label>
             <div class="col-md-8" style="display: inline-block">
               <date_picker
-                  v-bind:input.sync="date_start"
-                  :input_val="date_start"
+                  v-bind:input.sync="form.date_start"
+                  :from="date_start"
               ></date_picker>
             </div>
           </div>
@@ -17,7 +17,7 @@
         <div class="col-xl-3">
           <div class="form-group">
             <div class="col-md-12">
-              <button class="btn btn-default stats-filter-dark">
+              <button @click="showModalSubid = true" class="btn btn-default stats-filter-dark">
                 Выбрать SubID&nbsp;
                 <i class="fa fa-tag"></i>
               </button>
@@ -28,7 +28,7 @@
         <div class="col-xl-3">
           <div class="form-group">
             <div class="col-md-12">
-              <button class="btn btn-default stats-filter-dark">
+              <button @click="showModalPlatforms = true" class="btn btn-default stats-filter-dark">
                 Выбрать источники&nbsp;
                 <i class="fa fa-link"></i>
               </button>
@@ -39,7 +39,7 @@
         <div class="col-xl-3">
           <div class="form-group">
             <div class="col-md-12">
-              <button class="btn btn-default stats-filter-dark">
+              <button @click="showModalManagers = true" class="btn btn-default stats-filter-dark">
                 Выбрать менеджеров&nbsp;
                 <i class="fa fa-male"></i>
               </button>
@@ -54,8 +54,8 @@
             <label class="control-label col-md-3 text-left">По&nbsp;дату</label>
             <div class="col-md-8" style="display: inline-block">
               <date_picker
-                  v-bind:input.sync="date_end"
-                  :input_val="date_end"
+                  v-bind:input.sync="form.date_end"
+                  :from="date_end"
               ></date_picker>
             </div>
           </div>
@@ -64,7 +64,7 @@
         <div class="col-xl-3">
           <div class="form-group">
             <div class="col-md-12">
-              <button class="btn btn-default stats-filter-dark">
+              <button @click="showModalWebmasters = true" class="btn btn-default stats-filter-dark">
                 Выбрать вебмастеров&nbsp;
                 <i class="fa fa-group"></i>
               </button>
@@ -75,7 +75,7 @@
         <div class="col-xl-3">
           <div class="form-group">
             <div class="col-md-12">
-              <button class="btn btn-default stats-filter-dark">
+              <button @click="showModalOffers = true" class="btn btn-default stats-filter-dark">
                 Выбрать офферы&nbsp;
                 <i class="fa fa-folder-open"></i>
               </button>
@@ -92,21 +92,79 @@
         <a class="btn btn-default btn-sm" title="Сбросить фильтры" href="">Сбросить</a>
       </div>
     </div>
+    <check_box_modal
+        v-if="showModalSubid"
+        @close="showModalSubid = false"
+        :accept.sync="form.subids"
+        header_text="Subd Id"
+        @clickOut="showModalSubid = false"
+    >
+    </check_box_modal>
+    <modal
+        v-if="showModalManagers"
+        @close="showModalManagers = false"
+        :accept.sync="form.managers"
+        header_text="Менеджеры"
+        @clickOut="showModalManagers = false"
+    >
+    </modal>
+    <modal
+        v-if="showModalOffers"
+        @close="showModalOffers = false"
+        :accept.sync="form.offers"
+        header_text="Офферы"
+        @clickOut="showModalOffers = false"
+    >
+    </modal>
+    <modal
+        v-if="showModalPlatforms"
+        @close="showModalPlatforms = false"
+        :accept.sync="form.platforms"
+        header_text="Источники"
+        @clickOut="showModalPlatforms = false"
+    >
+    </modal>
+    <modal
+        v-if="showModalWebmasters"
+        @close="showModalWebmasters = false"
+        :accept.sync="form.webmasters"
+        header_text="Вебмастера"
+        @clickOut="showModalWebmasters = false"
+    >
+    </modal>
   </div>
 </template>
 
 <script>
-import vue_date_picker from "./vue_date_picker.vue";
+import vue_date_picker from "./date_picker.vue";
+import modal from "../modal.vue";
+import check_box_modal from "./check_box_modal.vue";
 
 export default {
   name: "stats_filter",
   components: {
-    'date_picker': vue_date_picker
+    'date_picker': vue_date_picker,
+    'modal' : modal,
+    'check_box_modal': check_box_modal
   },
   data() {
     return {
       date_start: '',
       date_end: '',
+      form: {
+        date_start : '',
+        date_end : '',
+        subids : [],
+        managers : [],
+        offers : [],
+        webmasters : [],
+        platforms : [],
+      },
+      showModalSubid: false,
+      showModalPlatforms: false,
+      showModalWebmasters: false,
+      showModalOffers: false,
+      showModalManagers: false,
     }
   },
   methods: {
@@ -120,7 +178,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../buttons.css";
+@import "../../style/buttons.css";
 
 .row {
   margin-left: unset;

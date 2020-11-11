@@ -1,14 +1,14 @@
 <template>
   <modal
       :component="component"
-      v-on:acceptModal="acceptModal"
+      v-on:accept="acceptModal"
       :header_text="header_text"
   ></modal>
 </template>
 
 <script>
 
-import date_picker from "./stats_filter/vue_date_picker.vue";
+import date_picker from "./stats_filter/date_picker.vue";
 import modal from "./modal.vue";
 
 export default {

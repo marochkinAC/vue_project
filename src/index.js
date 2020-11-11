@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import filter from "./components/stats_filter/stats_filter.vue";
-import './components/default.css'
+import './style/default.css'
 
 
 let app = new Vue({
