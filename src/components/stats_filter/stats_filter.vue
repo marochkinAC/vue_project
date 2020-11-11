@@ -105,13 +105,14 @@ export default {
   },
   data() {
     return {
-      date_start: '2020-01-01',
+      date_start: '',
       date_end: '',
     }
   },
   methods: {
     accept: function () {
-      alert(this.date_start + this.date_end)
+      this.date_start = '20.01.2020';
+      this.date_end = '30.01.2020';
     }
   }
 
