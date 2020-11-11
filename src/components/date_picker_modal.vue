@@ -2,6 +2,7 @@
   <modal
       :component="component"
       v-on:acceptModal="acceptModal"
+      :header_text="header_text"
   ></modal>
 </template>
 
@@ -12,6 +13,11 @@ import modal from "./modal.vue";
 
 export default {
   name: "date_picker_modal",
+  props:{
+    header_text: {
+      type: String
+    }
+  },
   components: {
     'date-picker': date_picker,
     'modal': modal

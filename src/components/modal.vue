@@ -5,15 +5,15 @@
 
         <div class="modal-header">
           <h4 class="modal-title">
-            Modal title
+            {{header_text}}
           </h4>
-          <i class="modal-close-button">X</i>
+          <i class="modal-close-button"></i>
         </div>
 
         <div class="modal-body">
           <component
               v-bind:is='component'
-              v-model="data"
+              v-bind:input.sync="data"
           ></component>
         </div>
 
@@ -31,6 +31,9 @@
 export default {
   name: "modal",
   props: {
+    header_text: {
+      type: String
+    },
     component: {
       type: Object
     },
@@ -49,8 +52,8 @@ export default {
 </script>
 
 <style scoped>
-  @import "~bootstrap/dist/css/bootstrap.min.css";
-
+  /*@import "~bootstrap/dist/css/bootstrap.min.css";*/
+  @import "buttons.css";
   .modal-mask {
     position: fixed;
     width: 100%;
@@ -61,23 +64,17 @@ export default {
     z-index: -9999;
   }
 
-  .btn-default {
-    border-color: #e5e5e5;
-    color: #333;
-    background-color: #fff;
-  }
-
-  .btn-default:hover {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad;
-  }
-
   .modal-content {
     padding: 0 25px;
   }
 
   .modal-footer {
     justify-content: left;
+  }
+
+  .modal-close-button {
+    background-image: url(../img/remove-icon-big.png);
+    width: 18px;
+    height: 18px;
   }
 </style>
